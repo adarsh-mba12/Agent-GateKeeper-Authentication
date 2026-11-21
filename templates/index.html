@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delta Agent Gatekeeper</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">a</span><div><strong>AuthBridge Gatekeeper</strong><small>NorthStar Air Lines · AI permission control</small></div></div>
+  <div class="enrollment">
+    ENROLMENT NO.
+    <strong>PGD202566590</strong>
+</div>
+</header>
+<main class="container">
+  <section class="hero">
+    <div><span class="eyebrow">AGENTIC COMMERCE SECURITY</span><h1>Control what AI agents<br>can do with flight bookings.</h1>
+    <p>Register an agent, evaluate flight requests, and revoke access with a timestamped audit trail.</p></div>
+    <div class="hero-icon">🛡️</div>
+  </section>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}<div class="messages">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+  {% endwith %}
+
+  <section class="grid two">
+    <article class="panel">
+      <div class="panel-head"><div><span class="eyebrow">01 / ACCESS</span><h2>Register an agent</h2></div><span class="tag">NEW PERMISSION</span></div>
+      <form action="/register" method="post" class="form">
+        <label>Customer name<input name="customer" placeholder="e.g. Adarsh" required></label>
+        <label>Agent name<input name="agent_name" placeholder="e.g. MyTravelAI" required></label>
+        <button class="btn primary" type="submit">Register agent <span>→</span></button>
+      </form>
+    </article>
+    <article class="panel">
+      <div class="panel-head"><div><span class="eyebrow">02 / DECISION</span><h2>Check a request</h2></div><span class="tag">POLICY ENGINE</span></div>
+      <form action="/decide" method="post" class="form">
+        <label>Customer name<input name="customer" placeholder="Customer who owns the agent" required></label>
+        <label>Agent name<input name="agent_name" placeholder="Registered agent name" required></label>
+        <div class="form-row">
+          <label>Requested action<select name="action" required><option value="view_fares">View Fares</option><option value="book">Book Flight</option><option value="change">Change Flight</option><option value="refund">Refund</option></select></label>
+          <label>Amount (USD)<input name="amount" type="number" min="0" step="0.01" value="0"></label>
+        </div>
+        <button class="btn primary" type="submit">Evaluate request <span>→</span></button>
+      </form>
+    </article>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><div><span class="eyebrow">03 / PERMISSIONS</span><h2>Registered agents</h2></div><span class="tag">{{ agents|length }} TOTAL</span></div>
+    {% if agents %}
+    <div class="table-wrap"><table><thead><tr><th>Agent</th><th>Customer</th><th>Status</th><th>Registered</th><th>Revoked at</th><th>Action</th></tr></thead><tbody>
+    {% for a in agents %}<tr><td><strong>{{ a.name }}</strong><small>{{ a.id }}</small></td><td>{{ a.customer }}</td><td><span class="status {{ a.status|lower }}">{{ a.status }}</span></td><td>{{ a.registered_at }}</td><td>{{ a.revoked_at or "—" }}</td><td>{% if a.status == "ACTIVE" %}<form action="/revoke/{{ a.id }}" method="post"><button class="btn danger small" type="submit" onclick="return confirm('Revoke this agent?')">Revoke</button></form>{% else %}<span class="muted">No action</span>{% endif %}</td></tr>{% endfor %}
+    </tbody></table></div>
+    {% else %}<p class="empty">No agents registered yet. Register one above to begin.</p>{% endif %}
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><div><span class="eyebrow">04 / POLICY</span><h2>Decision rules</h2></div><span class="tag">R1–R7</span></div>
+    <div class="rules">{% for code, rule in rules.items() %}<div class="rule"><b>{{ code }}</b><span>{{ rule }}</span></div>{% endfor %}</div>
+  </section>
+
+  <section class="panel" id="tests">
+    <div class="panel-head"><div><span class="eyebrow">05 / VALIDATION</span><h2>Six test cases</h2></div><form action="/run-demo-tests" method="post"><button class="btn secondary" type="submit">Run demo tests ↗</button></form></div>
+    
+    <p class="muted">Run the tests to compare expected and actual decisions. Every test is also added to the audit log.</p>
+    {% if test_results %}<div class="table-wrap"><table><thead><tr><th>Test</th><th>Expected</th><th>Actual</th><th>Rule</th><th>Result</th></tr></thead><tbody>{% for t in test_results %}<tr><td>{{ t.test }}</td><td>{{ t.expected }} / {{ t.expected_rule }}</td><td>{{ t.actual }} / {{ t.actual_rule }}</td><td>{{ t.actual_rule }}</td><td><span class="status {{ t.status|lower }}">{{ t.status }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="empty">No test run yet.</p>{% endif %}
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><div><span class="eyebrow">06 / ACCOUNTABILITY</span><h2>Audit log</h2></div><span class="tag">LATEST 12 EVENTS</span></div>
+    {% if logs %}<div class="table-wrap"><table><thead><tr><th>Date & time (IST)</th><th>Customer / Agent</th><th>Request</th><th>Decision</th><th>Rule</th></tr></thead><tbody>{% for l in logs %}<tr><td>{{ l.date_time }}</td><td>{{ l.customer }}<small>{{ l.agent }}</small></td><td>{{ l.action }}{% if l.amount %}<small>₹{{ "%.2f"|format(l.amount) }}</small>{% endif %}</td><td><span class="status {{ l.decision|lower|replace(' ', '-') }}">{{ l.decision }}</span><small>{{ l.reason }}</small></td><td>{{ l.rule }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="empty">No requests recorded yet.</p>{% endif %}
+  </section>
+  <footer>Prototype only · Does not connect to Delta accounts or book real flights.</footer>
+</main>
+</body></html>

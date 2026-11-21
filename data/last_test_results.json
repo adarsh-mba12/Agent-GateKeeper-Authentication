@@ -1,0 +1,50 @@
+[
+  {
+    "test": "Known agent views fares",
+    "expected": "ALLOW",
+    "actual": "ALLOW",
+    "expected_rule": "R4",
+    "actual_rule": "R4",
+    "status": "PASS"
+  },
+  {
+    "test": "Unknown agent requests fares",
+    "expected": "BLOCK",
+    "actual": "BLOCK",
+    "expected_rule": "R1",
+    "actual_rule": "R1",
+    "status": "PASS"
+  },
+  {
+    "test": "Flight booking above limit",
+    "expected": "ASK CUSTOMER",
+    "actual": "ASK CUSTOMER",
+    "expected_rule": "R6",
+    "actual_rule": "R6",
+    "status": "PASS"
+  },
+  {
+    "test": "Flight booking below limit",
+    "expected": "ALLOW",
+    "actual": "ALLOW",
+    "expected_rule": "R5",
+    "actual_rule": "R5",
+    "status": "PASS"
+  },
+  {
+    "test": "Revoked agent tries to view fares",
+    "expected": "BLOCK",
+    "actual": "BLOCK",
+    "expected_rule": "R2",
+    "actual_rule": "R2",
+    "status": "PASS"
+  },
+  {
+    "test": "Agent requests a flight change",
+    "expected": "ASK CUSTOMER",
+    "actual": "ASK CUSTOMER",
+    "expected_rule": "R7",
+    "actual_rule": "R7",
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "date_time": "2026-11-21T13:07:45+05:30",
+    "customer": "Adarsh",
+    "agent": "RefundBot",
+    "action": "Refund",
+    "amount": 100.0,
+    "decision": "ASK CUSTOMER",
+    "rule": "R7",
+    "reason": "Change and refund requests always require customer confirmation."
+  },
+  {
+    "date_time": "2026-11-21T13:06:23+05:30",
+    "customer": "Adarsh",
+    "agent": "TravelBot",
+    "action": "Refund",
+    "amount": 100.0,
+    "decision": "BLOCK",
+    "rule": "R2",
+    "reason": "A revoked agent is always blocked."
+  },
+  {
+    "date_time": "2026-11-21T13:05:27+05:30",
+    "customer": "Adarsh",
+    "agent": "TravelBot",
+    "action": "Book Flight",
+    "amount": 200.0,
+    "decision": "BLOCK",
+    "rule": "R2",
+    "reason": "A revoked agent is always blocked."
+  },
+  {
+    "date_time": "2026-11-21T13:02:55+05:30",
+    "customer": "Adarsh",
+    "agent": "TravelBot",
+    "action": "Book Flight",
+    "amount": 200.0,
+    "decision": "ALLOW",
+    "rule": "R5",
+    "reason": "A registered active agent may book a flight costing up to $500."
+  },
+  {
+    "date_time": "2026-11-21T13:02:44+05:30",
+    "customer": "Adarsh",
+    "agent": "TravelBot",
+    "action": "Book Flight",
+    "amount": 0.0,
+    "decision": "BLOCK",
+    "rule": "R5",
+    "reason": "Flight amount must be greater than zero."
+  },
+  {
+    "date_time": "2026-11-21T13:01:32+05:30",
+    "customer": "Adarsh",
+    "agent": "TravelBot",
+    "action": "Book Flight",
+    "amount": 200.0,
+    "decision": "ALLOW",
+    "rule": "R5",
+    "reason": "A registered active agent may book a flight costing up to $500."
+  },
+  {
+    "date_time": "2026-11-21T12:58:45+05:30",
+    "customer": "Adarsh",
+    "agent": "TravelBot",
+    "action": "Book Flight",
+    "amount": 2000.0,
+    "decision": "ASK CUSTOMER",
+    "rule": "R6",
+    "reason": "A flight booking above $500 requires customer confirmation."
+  },
+  {
+    "date_time": "2026-11-21T12:58:06+05:30",
+    "customer": "Adarsh",
+    "agent": "TravelBot",
+    "action": "Book Flight",
+    "amount": 25000.0,
+    "decision": "ASK CUSTOMER",
+    "rule": "R6",
+    "reason": "A flight booking above $500 requires customer confirmation."
+  },
+  {
+    "date_time": "2026-11-21T12:57:18+05:30",
+    "customer": "Adarsh",
+    "agent": "UnknownBot",
+    "action": "Book Flight",
+    "amount": 4999.93,
+    "decision": "BLOCK",
+    "rule": "R1",
+    "reason": "Unknown or unregistered agent is blocked."
+  },
+  {
+    "date_time": "2026-11-21T12:55:05+05:30",
+    "customer": "Adarsh",
+    "agent": "TravelBot",
+    "action": "View Fares",
+    "amount": 0.0,
+    "decision": "ALLOW",
+    "rule": "R4",
+    "reason": "A registered active agent may view fares (read-only)."
+  },
+  {
+    "date_time": "2026-11-19T13:23:43+05:30",
+    "customer": "test customer",
+    "agent": "DeltaTravel",
+    "action": "View Fares",
+    "amount": 0.0,
+    "decision": "ALLOW",
+    "rule": "R4",
+    "reason": "A registered active agent may view fares (read-only)."
+  },
+  {
+    "date_time": "2026-11-19T13:18:22+05:30",
+    "customer": "Test customer",
+    "agent": "deltaTravel",
+    "action": "View Fares",
+    "amount": 0.0,
+    "decision": "BLOCK",
+    "rule": "R1",
+    "reason": "Unknown or unregistered agent is blocked."
+  },
+  {
+    "date_time": "2026-11-19T13:16:46+05:30",
+    "customer": "Demo Customer",
+    "agent": "DemoAgent",
+    "action": "Change Flight",
+    "amount": 0.0,
+    "decision": "ASK CUSTOMER",
+    "rule": "R7",
+    "reason": "Change and refund requests always require customer confirmation."
+  },
+  {
+    "date_time": "2026-11-19T13:16:46+05:30",
+    "customer": "Demo Customer",
+    "agent": "RevokedDemoAgent",
+    "action": "View Fares",
+    "amount": 0.0,
+    "decision": "BLOCK",
+    "rule": "R2",
+    "reason": "A revoked agent is always blocked."
+  },
+  {
+    "date_time": "2026-11-19T13:16:46+05:30",
+    "customer": "Demo Customer",
+    "agent": "DemoAgent",
+    "action": "Book Flight",
+    "amount": 300.0,
+    "decision": "ALLOW",
+    "rule": "R5",
+    "reason": "A registered active agent may book a flight costing up to $500."
+  },
+  {
+    "date_time": "2026-11-19T13:16:46+05:30",
+    "customer": "Demo Customer",
+    "agent": "DemoAgent",
+    "action": "Book Flight",
+    "amount": 800.0,
+    "decision": "ASK CUSTOMER",
+    "rule": "R6",
+    "reason": "A flight booking above $500 requires customer confirmation."
+  },
+  {
+    "date_time": "2026-11-19T13:16:46+05:30",
+    "customer": "Demo Customer",
+    "agent": "UnknownBot",
+    "action": "View Fares",
+    "amount": 0.0,
+    "decision": "BLOCK",
+    "rule": "R1",
+    "reason": "Unknown or unregistered agent is blocked."
+  },
+  {
+    "date_time": "2026-11-19T13:16:46+05:30",
+    "customer": "Demo Customer",
+    "agent": "DemoAgent",
+    "action": "View Fares",
+    "amount": 0.0,
+    "decision": "ALLOW",
+    "rule": "R4",
+    "reason": "A registered active agent may view fares (read-only)."
+  }
+]
